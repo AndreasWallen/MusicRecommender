@@ -1,0 +1,44 @@
+﻿@model MusicRecommenderMVC.Models.ArtistsResult
+
+@{
+    ViewBag.Title = "Recommendation";
+}
+
+<div class="alert alert-info" role="alert">
+    <p class="h3">
+        @(Model.RelatedArtists.Any() ? $"Since you like \"{Model.RelatedArtists.First().RelatedArtistName}\", you might be interested in..." :
+                      $"You like \"{Model.OriginalArtistName}\" huh?")</p>
+</div>
+
+@if (!Model.RelatedArtists.Any())
+{
+    <div class="alert alert-danger" role="alert">
+        No recommendations found. Please try again.
+    </div>
+}
+
+@if (Model.RelatedArtists.Any())
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Popularity (0 - 100)</th>
+            <th scope="col">Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var artist in Model.RelatedArtists)
+        {
+            <tr>
+                <td>@artist.Name</td>
+                <td>@artist.Popularity</td>
+                <td><img src="@artist.ImageUrl"/></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+<a href="@Url.Action("Index", "Music")" class="btn btn-info">Go back and get a new recommendation</a>

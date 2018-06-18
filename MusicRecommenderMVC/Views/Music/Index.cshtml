@@ -1,0 +1,15 @@
+﻿@model MusicRecommenderMVC.Models.FormData
+@{
+    ViewBag.Title = "Get music recommendations";
+}
+
+<h2>Get music recommendations</h2>
+
+@using (Html.BeginForm("recommendation", "music", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.ArtistName, new { @class = "form-control", placeholder = "Type the name of an artist you like", tabindex = 1, required = true })
+    </div>
+    <input class="btn btn-success " type="submit" value="Find music for me!" />
+
+}
