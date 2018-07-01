@@ -22,7 +22,7 @@ namespace MusicRecommenderMVC.Controllers
         [HttpPost]
         public ActionResult Recommendation(FormData formData)
         {
-            var spotifyService = new SpotifyService();
+            var spotifyService = new SpotifyService(new TokenProvider());
             var artists = spotifyService.SearchArtists(formData.ArtistName);
             var artistsResult = new ArtistsResult(formData.ArtistName, artists.ToList());
             return View(artistsResult);
